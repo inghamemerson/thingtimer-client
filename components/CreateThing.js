@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { jsx, css } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import { Paper, Grid, TextField, Button } from '@material-ui/core';
 import { ALL_THINGS_QUERY } from './ListThings';
 
@@ -52,12 +52,12 @@ const CreateThing = () => {
   };
 
   return (
-    <Paper css={css`
-      padding: 20px;
-      margin-top: 20px;
-    `}>
+    <Paper css={{
+      padding: '20px',
+      marginTop: '20px'
+    }}>
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={8} alignItems="flex-end">
+        <Grid container spacing={6} alignItems="flex-end">
           <Grid item md={4} sm={6} xs={12}>
             <TextField id="title" label="Title" name="title" fullWidth autoFocus required />
           </Grid>

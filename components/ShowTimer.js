@@ -1,5 +1,8 @@
+/** @jsx jsx */
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { jsx } from '@emotion/core';
+import { Grid, Typography, Button, Card, CardActions, CardContent } from '@material-ui/core';
 import * as moment from 'moment';
 import { utcTimeAgo, timeDiff } from '../lib/helpers';
 import { ALL_THINGS_QUERY } from './ListThings';
@@ -28,18 +31,7 @@ const ShowTimer = (props) => {
   const timer = props.timer;
   const [updateTimer] = useMutation(UPDATE_TIMER_MUTATION);
 
-  const [deleteTimer] = useMutation(
-    DELETE_TIMER_MUTATION,
-    {
-      update(cache, { data: { deleteTimer } }) {
-        const { things } = cache.readQuery({ query: ALL_THINGS_QUERY });
-        cache.writeQuery({
-          query: ALL_THINGS_QUERY,
-          data: { things: things },
-        });
-      }
-    }
-  );
+  const [deleteTimer] = useMutation(DELETE_TIMER_MUTATION);
 
   const handleUpdate = event => {
     event.preventDefault();
@@ -47,21 +39,8 @@ const ShowTimer = (props) => {
     const endedAt = moment().utc().format('YYYY-MM-DD HH:mm:ss');
 
     updateTimer({
-      variables: { id, endedAt },
-      update: (cache, { data: { updateTimer } }) => {
-        const data = cache.readQuery({
-          query: ALL_THINGS_QUERY
-        })
-        // Update the cache with the new timer at the top
-        cache.writeQuery({
-          query: ALL_THINGS_QUERY,
-          data: {
-            ...data,
-            things: [...data.things],
-          }
-        })
-      },
-    })
+      variables: { id, endedAt }
+    });
   }
 
   return (

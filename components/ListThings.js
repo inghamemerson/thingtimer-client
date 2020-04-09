@@ -1,4 +1,7 @@
+/** @jsx jsx */
 import { useQuery } from '@apollo/react-hooks'
+import { Grid } from '@material-ui/core';
+import { jsx } from '@emotion/core';
 import gql from 'graphql-tag';
 import ShowThing from './ShowThing';
 
@@ -35,13 +38,13 @@ const ListThings = () => {
   if (error) return `Error! ${error.message}`;
 
   return (
-    <section>
-      <ul>
-        {data.things.map((thing) => (
-          <ShowThing key={thing.uuid} thing={thing} />
-        ))}
-      </ul>
-    </section>
+    <Grid container spacing={2} alignItems="flex-start" css={{
+      marginTop: '20px'
+    }}>
+      {data.things.map((thing) => (
+        <ShowThing key={thing.uuid} thing={thing} />
+      ))}
+    </Grid>
   );
 }
 

@@ -1,5 +1,8 @@
+/** @jsx jsx */
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { jsx } from '@emotion/core';
+import { Grid, Typography, Button, Card, CardActions, CardContent } from '@material-ui/core';
 import { ALL_THINGS_QUERY } from './ListThings';
 import ShowTimer from './ShowTimer';
 import CreateTimer from './CreateTimer';
@@ -16,45 +19,38 @@ const DELETE_THING_MUTATION = gql`
 const ShowThing = (props) => {
   const thing = props.thing;
 
-  const [deleteThing] = useMutation(
-    DELETE_THING_MUTATION,
-    {
-      update(cache, { data: { deleteThing } }) {
-        const { things } = cache.readQuery({ query: ALL_THINGS_QUERY });
-        cache.writeQuery({
-          query: ALL_THINGS_QUERY,
-          data: { things: things },
-        });
-      }
-    }
-  );
+  const [deleteThing] = useMutation(DELETE_THING_MUTATION);
 
   return (
-    <li>
-      <div>
-        <h2>
-          {thing.title}
-          {thing.quantity ? (<span> Qty:{thing.quantity}</span>) : ''}
-          {thing.timers.length ? (<span> Lasts about: {lifespan(thing)}</span>) : ''}
-        </h2>
-      </div>
-      <form onSubmit={e => {
-          e.preventDefault();
-          deleteThing({ variables: { id: thing.id } });
-        }}>
-        <button type="submit">
-          Delete Thing
-        </button>
-      </form>
-      <CreateTimer thing={thing} />
-      <div>
-        {thing.timers.map((timer) => (
-          <ShowTimer key={timer.id} timer={timer} />
-        ))}
-      </div>
-    </li>
+    <Grid item md={4} sm={6} xs={12}>
+      <Card>
+        <CardContent>
+          <Typography variant="h5" component="p">{thing.title}</Typography>
+          <Typography variant="body2" component="p">
+            {thing.quantity ? (<span> Qty:{thing.quantity}</span>) : ''}
+            {lifespan(thing) ? (<span> &mdash; Lasts about: {lifespan(thing)}</span>) : ''}</Typography>
+        </CardContent>
+        <CardContent>
+          <CreateTimer thing={thing} />
+          <div>
+            {thing.timers.map((timer) => (
+              <ShowTimer key={timer.id} timer={timer} />
+            ))}
+          </div>
+        </CardContent>
+        <CardActions>
+          <form onSubmit={e => {
+              e.preventDefault();
+              deleteThing({ variables: { id: thing.id } });
+            }}>
+            <Button type="submit" size="small" color="secondary">
+              Delete Thing
+            </Button>
+          </form>
+        </CardActions>
+      </Card>
+    </Grid>
   );
 }
 
 export default ShowThing;
-
