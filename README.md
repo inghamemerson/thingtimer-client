@@ -60,6 +60,7 @@ All of the `Things` are initially fetched from the backend in [components/ListTh
 ## **What’s next**
 Some notes I have in mind for the future if I continue to tinker on this:
 - [ ] Update local state instead of polling
+- [ ] Error handling
 - [ ] Create user accounts or create a local token to scope Things to one machine
 - [ ] Clean and organize components
 - [ ] Improve user experience of adding/deleting things and managing timers
