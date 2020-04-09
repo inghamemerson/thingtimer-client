@@ -2,7 +2,7 @@
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { jsx } from '@emotion/core';
-import { Grid, Typography, Button, Card, CardActions, CardContent } from '@material-ui/core';
+import { Grid, Typography, Button } from '@material-ui/core';
 import * as moment from 'moment';
 import { utcTimeAgo, timeDiff } from '../lib/helpers';
 
@@ -44,27 +44,35 @@ const ShowTimer = (props) => {
 
   return (
     <div>
-      <p>{timer.name}</p>
-      {timer.ended_at ? (
-        <p>{timeDiff(timer.started_at, timer.ended_at)}</p>
-      ) : (
-        <div>
-          <p>{utcTimeAgo(timer.started_at)}</p>
-          <form onSubmit={handleUpdate}>
-            <button type="submit">
-              Stop Timer
-            </button>
+      <Typography variant="subtitle2" component="p" css={{
+        marginTop: "20px"
+      }}>
+        {timer.name}{timer.ended_at ? (<span> - {timeDiff(timer.started_at, timer.ended_at)}</span>) : (<span> - {utcTimeAgo(timer.started_at)}</span>)}
+      </Typography>
+
+      <Grid container spacing={2} alignItems="flex-end" css={{
+        marginTop: "20px"
+      }}>
+        {!timer.ended_at ? (
+          <Grid item md={6} sm={12} xs={12}>
+            <form onSubmit={handleUpdate}>
+              <Button size="small" type="submit" variant="outlined" color="primary" fullWidth>
+                Stop Timer
+              </Button>
+            </form>
+          </Grid>
+        ) : ''}
+        <Grid item md={6} sm={12} xs={12}>
+          <form onSubmit={e => {
+            e.preventDefault();
+            deleteTimer({ variables: { id: timer.id } });
+          }}>
+            <Button size="small" type="submit" variant="outlined" color="secondary" fullWidth>
+              Delete Timer
+            </Button>
           </form>
-        </div>
-      )}
-      <form onSubmit={e => {
-          e.preventDefault();
-          deleteTimer({ variables: { id: timer.id } });
-        }}>
-        <button type="submit">
-          delete
-        </button>
-      </form>
+        </Grid>
+      </Grid>
     </div>
   );
 }

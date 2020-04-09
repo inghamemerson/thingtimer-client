@@ -41,7 +41,7 @@ const CreateTimer = (props) => {
       <Grid container spacing={6} alignItems="flex-start">
         <Grid item xs={12}>
           <Button size="small" type="submit" variant="outlined" color="primary" fullWidth>
-            Start Timer
+            Start New Timer
           </Button>
         </Grid>
       </Grid>
