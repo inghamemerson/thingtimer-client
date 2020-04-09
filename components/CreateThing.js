@@ -23,7 +23,7 @@ const CREATE_THING_MUTATION = gql`
 `;
 
 const CreateThing = () => {
-  const [createThing, { loading }] = useMutation(CREATE_THING_MUTATION);
+  const [createThing] = useMutation(CREATE_THING_MUTATION);
 
   const handleSubmit = event => {
     event.preventDefault();

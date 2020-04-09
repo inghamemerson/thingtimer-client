@@ -17,7 +17,7 @@ const CREATE_TIMER_MUTATION = gql`
 `;
 
 const CreateTimer = (props) => {
-  const [createTimer, { loading }] = useMutation(CREATE_TIMER_MUTATION);
+  const [createTimer] = useMutation(CREATE_TIMER_MUTATION);
 
   const handleSubmit = event => {
     event.preventDefault();

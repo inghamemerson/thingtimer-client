@@ -17,7 +17,6 @@ const DELETE_THING_MUTATION = gql`
 
 const ShowThing = (props) => {
   const thing = props.thing;
-
   const [deleteThing] = useMutation(DELETE_THING_MUTATION);
 
   return (

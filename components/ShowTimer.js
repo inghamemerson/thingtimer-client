@@ -29,7 +29,6 @@ const UPDATE_TIMER_MUTATION = gql`
 const ShowTimer = (props) => {
   const timer = props.timer;
   const [updateTimer] = useMutation(UPDATE_TIMER_MUTATION);
-
   const [deleteTimer] = useMutation(DELETE_TIMER_MUTATION);
 
   const handleUpdate = event => {
