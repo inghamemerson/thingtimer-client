@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { jsx } from '@emotion/core';
 import { Grid, Typography, Button, Card, CardActions, CardContent } from '@material-ui/core';
-import { ALL_THINGS_QUERY } from './ListThings';
 import ShowTimer from './ShowTimer';
 import CreateTimer from './CreateTimer';
 import { lifespan } from '../lib/helpers';

@@ -5,7 +5,6 @@ import { jsx } from '@emotion/core';
 import { Grid, Typography, Button, Card, CardActions, CardContent } from '@material-ui/core';
 import * as moment from 'moment';
 import { utcTimeAgo, timeDiff } from '../lib/helpers';
-import { ALL_THINGS_QUERY } from './ListThings';
 
 const DELETE_TIMER_MUTATION = gql`
   mutation deleteTimer($id: ID!) {

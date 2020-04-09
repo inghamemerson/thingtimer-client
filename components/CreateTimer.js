@@ -2,7 +2,7 @@
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { jsx } from '@emotion/core';
-import { TextField, Button, Grid, Typography } from '@material-ui/core';
+import { TextField, Button, Grid } from '@material-ui/core';
 import * as moment from 'moment';
 
 const CREATE_TIMER_MUTATION = gql`
@@ -50,29 +50,3 @@ const CreateTimer = (props) => {
 }
 
 export default CreateTimer; 
-
-{/* <Paper css={{
-  padding: '20px',
-  marginTop: '20px'
-}}>
-  <form onSubmit={handleSubmit}>
-    <Grid container spacing={6} alignItems="flex-end">
-      <Grid item md={4} sm={6} xs={12}>
-        <TextField id="title" label="Title" name="title" fullWidth autoFocus required />
-      </Grid>
-      <Grid item md={4} sm={6} xs={12}>
-        <TextField id="quantity"
-          label="Quantity"
-          type="number"
-          name="quantity"
-          fullWidth
-           />
-      </Grid>
-      <Grid item md={4} sm={12} xs={12}>
-        <Button type="submit" variant="outlined" color="primary" fullWidth>
-          Create thing
-        </Button>
-      </Grid>
-    </Grid>
-  </form>
-</Paper> */}
