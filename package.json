@@ -1,0 +1,37 @@
+{
+  "name": "allergicto",
+  "version": "1.0.0",
+  "description": "Shareable profiles that show allergies",
+  "main": "index.js",
+  "author": "Jamie Emerson <inghamemerson@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.4",
+    "@apollo/react-ssr": "^3.1.4",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@material-ui/core": "^4.9.9",
+    "@material-ui/icons": "^4.9.1",
+    "apollo-boost": "^0.4.7",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link-http": "^1.5.16",
+    "clsx": "^1.1.0",
+    "graphql": "^15.0.0",
+    "graphql-tag": "^2.10.3",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "next": "^9.3.4",
+    "next-apollo": "^3.1.10",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
