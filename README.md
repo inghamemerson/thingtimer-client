@@ -70,6 +70,6 @@ Some notes I have in mind for the future if I continue to tinker on this:
 - [ ] Lifespan math should take into account how many of a Thing are in use at a given time
 
 ## The Future
-- [ ] Integrate with Amazon to autobuy products so they arrive before exhausted
+- [ ] Integrate with Amazon to auto-buy products so they arrive before exhausted
 - [ ] Integrate with quantum computer to show how alternate realities stack up
-- [ ] $$$ Profit
+- [ ] 💰 Profit
