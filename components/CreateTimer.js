@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { jsx } from '@emotion/core';
 import { TextField, Button, Grid } from '@material-ui/core';
 import * as moment from 'moment';
+import { ALL_THINGS_QUERY } from './ListThings';
 
 const CREATE_TIMER_MUTATION = gql`
   mutation createTimer($name: String!, $thingId: String! $startedAt: DateTime!) {
@@ -17,7 +18,10 @@ const CREATE_TIMER_MUTATION = gql`
 `;
 
 const CreateTimer = (props) => {
-  const [createTimer] = useMutation(CREATE_TIMER_MUTATION);
+  const [createTimer] = useMutation(CREATE_TIMER_MUTATION, {
+    refetchQueries: [{query: ALL_THINGS_QUERY}],
+    awaitRefetchQueries: true
+  });
 
   const handleSubmit = event => {
     event.preventDefault();

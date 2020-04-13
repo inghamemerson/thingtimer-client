@@ -6,6 +6,7 @@ import { Grid, Typography, Button, Card, CardActions, CardContent } from '@mater
 import ShowTimer from './ShowTimer';
 import CreateTimer from './CreateTimer';
 import { lifespan } from '../lib/helpers';
+import { ALL_THINGS_QUERY } from './ListThings';
 
 const DELETE_THING_MUTATION = gql`
   mutation deleteThing($id: ID!) {
@@ -17,7 +18,10 @@ const DELETE_THING_MUTATION = gql`
 
 const ShowThing = (props) => {
   const thing = props.thing;
-  const [deleteThing] = useMutation(DELETE_THING_MUTATION);
+  const [deleteThing] = useMutation(DELETE_THING_MUTATION, {
+    refetchQueries: [{query: ALL_THINGS_QUERY}],
+    awaitRefetchQueries: true
+  });
 
   return (
     <Grid item md={4} sm={6} xs={12}>

@@ -5,6 +5,7 @@ import { jsx } from '@emotion/core';
 import { Grid, Typography, Button } from '@material-ui/core';
 import * as moment from 'moment';
 import { utcTimeAgo, timeDiff } from '../lib/helpers';
+import { ALL_THINGS_QUERY } from './ListThings';
 
 const DELETE_TIMER_MUTATION = gql`
   mutation deleteTimer($id: ID!) {
@@ -28,8 +29,14 @@ const UPDATE_TIMER_MUTATION = gql`
 
 const ShowTimer = (props) => {
   const timer = props.timer;
-  const [updateTimer] = useMutation(UPDATE_TIMER_MUTATION);
-  const [deleteTimer] = useMutation(DELETE_TIMER_MUTATION);
+  const [updateTimer] = useMutation(UPDATE_TIMER_MUTATION, {
+    refetchQueries: [{query: ALL_THINGS_QUERY}],
+    awaitRefetchQueries: true
+  });
+  const [deleteTimer] = useMutation(DELETE_TIMER_MUTATION, {
+    refetchQueries: [{query: ALL_THINGS_QUERY}],
+    awaitRefetchQueries: true
+  });
 
   const handleUpdate = event => {
     event.preventDefault();

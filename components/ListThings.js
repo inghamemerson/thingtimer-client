@@ -30,9 +30,7 @@ export const ALL_THINGS_QUERY = gql`
 `;
 
 const ListThings = () => {
-  const { loading, error, data } = useQuery(ALL_THINGS_QUERY, {
-    pollInterval: 250,
-  });
+  const { loading, error, data } = useQuery(ALL_THINGS_QUERY);
 
   if (loading) return <div>Loading...</div>;
   if (error) return `Error! ${error.message}`;

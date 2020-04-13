@@ -23,7 +23,10 @@ const CREATE_THING_MUTATION = gql`
 `;
 
 const CreateThing = () => {
-  const [createThing] = useMutation(CREATE_THING_MUTATION);
+  const [createThing] = useMutation(CREATE_THING_MUTATION, {
+    refetchQueries: [{query: ALL_THINGS_QUERY}],
+    awaitRefetchQueries: true
+  });
 
   const handleSubmit = event => {
     event.preventDefault();
