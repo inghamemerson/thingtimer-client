@@ -18,10 +18,7 @@ const CREATE_TIMER_MUTATION = gql`
 `;
 
 const CreateTimer = (props) => {
-  const [createTimer] = useMutation(CREATE_TIMER_MUTATION, {
-    refetchQueries: [{query: ALL_THINGS_QUERY}],
-    awaitRefetchQueries: true
-  });
+  const [createTimer] = useMutation(CREATE_TIMER_MUTATION, {refetchQueries: [{query: ALL_THINGS_QUERY}],awaitRefetchQueries: true});
 
   const handleSubmit = event => {
     event.preventDefault();

@@ -7,7 +7,6 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { jsx } from '@emotion/core';
 import { withApollo } from '../lib/apollo'
-import CreateThing from '../components/CreateThing';
 import ListThings from '../components/ListThings';
 
 const Index = () => (
@@ -24,7 +23,6 @@ const Index = () => (
     <Typography variant="body1" gutterBottom>
       The calculation uses the average of all completed timers to calculate the length of time the thing they are related to exists. If a quantity is associated with the thing, it multiplies the average lifespan by the quantity to estimate how long it will take to exhaust the thing.
     </Typography>
-    <CreateThing />
     <ListThings />
   </Container>
 );

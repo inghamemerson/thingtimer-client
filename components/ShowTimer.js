@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { jsx } from '@emotion/core';
 import { Grid, Typography, Button } from '@material-ui/core';
 import * as moment from 'moment';
+import * as store from 'store';
 import { utcTimeAgo, timeDiff } from '../lib/helpers';
 import { ALL_THINGS_QUERY } from './ListThings';
 
@@ -29,14 +30,10 @@ const UPDATE_TIMER_MUTATION = gql`
 
 const ShowTimer = (props) => {
   const timer = props.timer;
-  const [updateTimer] = useMutation(UPDATE_TIMER_MUTATION, {
-    refetchQueries: [{query: ALL_THINGS_QUERY}],
-    awaitRefetchQueries: true
-  });
-  const [deleteTimer] = useMutation(DELETE_TIMER_MUTATION, {
-    refetchQueries: [{query: ALL_THINGS_QUERY}],
-    awaitRefetchQueries: true
-  });
+  let uuids = store.get('uuids') || [];
+
+  const [updateTimer] = useMutation(UPDATE_TIMER_MUTATION, {refetchQueries: [{query: ALL_THINGS_QUERY, variables: {uuids}}],awaitRefetchQueries: true});
+  const [deleteTimer] = useMutation(DELETE_TIMER_MUTATION, {refetchQueries: [{query: ALL_THINGS_QUERY, variables: {uuids}}],awaitRefetchQueries: true});
 
   const handleUpdate = event => {
     event.preventDefault();

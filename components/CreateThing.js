@@ -1,9 +1,12 @@
 /** @jsx jsx */
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import * as store from 'store';
+import * as _ from 'lodash';
 import { jsx } from '@emotion/core';
 import { Paper, Grid, TextField, Button } from '@material-ui/core';
 import { ALL_THINGS_QUERY } from './ListThings';
+import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
 
 const CREATE_THING_MUTATION = gql`
   mutation createThing($title: String!, $quantity: String) {
@@ -22,10 +25,16 @@ const CREATE_THING_MUTATION = gql`
   }
 `;
 
-const CreateThing = () => {
+const CreateThing = (props) => {
+
   const [createThing] = useMutation(CREATE_THING_MUTATION, {
-    refetchQueries: [{query: ALL_THINGS_QUERY}],
-    awaitRefetchQueries: true
+    onCompleted: (data) => {
+      let uuids = store.get('uuids') || [];
+      let updatedCurrentUuids = _.union(uuids, [data.createThing.uuid]);
+      store.set('uuids', updatedCurrentUuids);
+      uuids = store.get('uuids') || [];
+      props.refetch({variables: {uuids}});
+    }
   });
 
   const handleSubmit = event => {
@@ -36,22 +45,7 @@ const CreateThing = () => {
     const quantity = formData.get('quantity');
     form.reset();
 
-    createThing({
-      variables: { title, quantity },
-      update: (cache, { data: { createThing } }) => {
-        const data = cache.readQuery({
-          query: ALL_THINGS_QUERY
-        });
-        // Update the cache with the new thing at the top
-        cache.writeQuery({
-          query: ALL_THINGS_QUERY,
-          data: {
-            ...data,
-            things: [createThing, ...data.things],
-          }
-        });
-      },
-    });
+    createThing({variables: { title, quantity }});
   };
 
   return (
